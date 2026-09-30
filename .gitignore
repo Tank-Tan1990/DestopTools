@@ -1,0 +1,69 @@
+# ============================================================
+# DestopTools — Git 忽略规则
+# 仅提交「源码 + 文档 + 资源」，所有构建产物 / 个人配置 / 运行期数据 一律忽略
+# ============================================================
+
+# ---------- Qt / MSVC 构建产物 ----------
+release/
+debug/
+build/
+*.pro.user
+.qmake.stash
+Makefile
+Makefile.Debug
+Makefile.Release
+moc_*.cpp
+moc_*.h
+ui_*.h
+qrc_*.cpp
+# qmake/nmake 生成的链接器响应脚本（位于源码根目录，非 release/）
+object_script.*
+*.obj
+*.o
+*.res
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.lastbuildstate
+*.exp
+*.lib
+*.dll
+*.exe
+*.map
+
+# ---------- 用户配置 / 运行期数据（含个人隐私，禁止提交）----------
+# 应用配置写在 %APPDATA%\DestopTools\DestopTools.ini，绝不入库
+*.ini
+# 运行期诊断日志（trace.log / crash.log）由程序生成，不入库
+*.log
+# 备份目录（本地快照）
+*_backup_*/
+backup/
+DestopTools_src_backup_*/
+
+# ---------- IDE / 操作系统 ----------
+.vs/
+*.suo
+*.ncb
+*.aps
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Python ----------
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ---------- 版本控制 ----------
+# 本仓库只使用 Git；上游 Subversion 元数据不混入
+.svn/
+
+# ---------- 临时 / 其他 ----------
+tmp/
+*.tmp
+*.bak

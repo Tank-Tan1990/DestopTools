@@ -1,0 +1,3 @@
+// DestopTools 应用图标资源 —— 把 appicon.ico 编进 exe（任务栏 / 资源管理器 / Alt-Tab 均取此图标）
+// 由 tools/make_icon.py 生成 appicon.ico（显示器外形 + 「谭」「征」两块）。
+IDI_ICON1 ICON "appicon.ico"

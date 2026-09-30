@@ -1,0 +1,39 @@
+# DestopTools .gitattributes
+# 统一换行与二进制判定，保证跨平台克隆后构建一致。
+
+# 文本文件：显式声明为文本，按仓库统一使用 LF 检出/提交
+*.md      text eol=lf
+*.txt     text eol=lf
+*.pro     text eol=lf
+*.py      text eol=lf
+*.bat     text eol=crlf
+*.rc      text eol=crlf
+*.qrc     text eol=lf
+*.ui      text eol=lf
+*.svg     text eol=lf
+*.json    text eol=lf
+
+# C++ 源码：项目默认以 UTF-8 无 BOM + /utf-8 编译，统一 LF
+*.h       text eol=lf
+*.cpp     text eol=lf
+*.c       text eol=lf
+*.cc      text eol=lf
+
+# 二进制资源：避免 Git 做换行转换导致损坏
+*.png     binary
+*.ico     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.exe     binary
+*.dll     binary
+*.pdb     binary
+*.obj     binary
+*.o       binary
+*.map     binary
+*.qm      binary
+
+# 其他明确文本
+LICENSE   text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

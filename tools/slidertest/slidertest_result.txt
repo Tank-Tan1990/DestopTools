@@ -1,0 +1,13 @@
+START (Qt 5.14.2)
+slider geometry = 260x24, value=100
+==== 拖动 1（手柄起点 → 左端） ====
+[sliderPressed] sigArg=-  value()=100  sliderPosition()=100
+[sliderMoved] sigArg=6  value()=100  sliderPosition()=6
+[sliderReleased] sigArg=-  value()=100  sliderPosition()=6
+[valueChanged] sigArg=6  value()=6  sliderPosition()=6
+---- 抬起返回后（同一时刻）value()=6 ----
+==== 拖动 2（当前手柄 → 右端 ≈100%） ====
+[valueChanged] sigArg=16  value()=16  sliderPosition()=16
+---- 抬起返回后（同一时刻）value()=16 ----
+==== 事件循环跑完后的最终 value()=16（这才是应落盘的值） ====
+END

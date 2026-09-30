@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DestopTools 产品功能设计与实现文档</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#1f2733; --sub:#5b6675; --line:#e6eaf0; --soft:#f5f7fa;
+    --accent:#10b981; --accent-ink:#0c8a63; --warn:#e8743b; --code-bg:#f3f5f8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.75;font-size:15px;}
+  .cover{max-width:920px;margin:0 auto;padding:90px 40px 70px;border-bottom:3px solid var(--accent);}
+  .cover .tag{display:inline-block;background:var(--soft);color:var(--accent-ink);font-size:13px;
+    padding:4px 12px;border-radius:20px;letter-spacing:1px;font-weight:600;}
+  .cover h1{font-size:38px;margin:22px 0 10px;font-weight:700;letter-spacing:1px;}
+  .cover .sub{font-size:17px;color:var(--sub);margin:0 0 28px;}
+  .cover .meta{font-size:13px;color:var(--sub);border-top:1px solid var(--line);padding-top:18px;margin-top:30px;}
+  .cover .meta b{color:var(--ink);font-weight:600;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 40px 80px;}
+  nav.toc{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin:40px 0 50px;}
+  nav.toc h3{margin:0 0 12px;font-size:15px;color:var(--accent-ink);letter-spacing:1px;}
+  nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:40px;}
+  nav.toc li{margin:5px 0;font-size:14px;}
+  nav.toc a{color:var(--ink);text-decoration:none;}
+  nav.toc a:hover{color:var(--accent-ink);}
+  section{margin:0 0 54px;}
+  h2{font-size:25px;font-weight:700;border-left:5px solid var(--accent);padding-left:14px;margin:0 0 22px;scroll-margin-top:20px;}
+  h3{font-size:19px;font-weight:650;margin:30px 0 12px;color:#16202c;}
+  h4{font-size:16px;font-weight:600;margin:20px 0 8px;color:var(--accent-ink);}
+  p{margin:10px 0;}
+  .lead{font-size:16px;color:var(--sub);}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+  th{background:var(--soft);font-weight:600;color:#16202c;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:16px 0;background:#fff;
+    box-shadow:0 1px 3px rgba(20,30,50,.04);}
+  .card .lbl{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;
+    padding:3px 10px;border-radius:6px;margin-right:8px;}
+  .lbl-pain{background:#fdeee6;color:#b9541e;}
+  .lbl-goal{background:#e7f6f0;color:var(--accent-ink);}
+  .lbl-point{background:#eef2f7;color:#3a4a60;}
+  .card ul{margin:8px 0 0;padding-left:20px;}
+  .card li{margin:4px 0;}
+  .spec{background:var(--code-bg);border-radius:10px;padding:14px 18px;margin:14px 0;font-size:13.5px;}
+  .spec code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;}
+  .kpi{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0;}
+  .kpi .box{flex:1;min-width:150px;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;background:var(--soft);}
+  .kpi .num{font-size:26px;font-weight:700;color:var(--accent-ink);}
+  .kpi .cap{font-size:12.5px;color:var(--sub);margin-top:4px;}
+  .note{border-left:4px solid var(--warn);background:#fff8f3;padding:10px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;}
+  .ok{border-left:4px solid var(--accent);background:#f1faf6;padding:10px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;}
+  footer{max-width:920px;margin:0 auto;padding:30px 40px 60px;color:var(--sub);font-size:13px;border-top:1px solid var(--line);}
+  .pill{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:2px 10px;font-size:12.5px;margin:2px 4px 2px 0;color:#3a4a60;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <span class="tag">PRODUCT DESIGN &amp; IMPLEMENTATION</span>
+  <h1>DestopTools</h1>
+  <p class="sub">智能桌面整理与图标收纳工具 · 产品功能设计与实现文档</p>
+  <div class="meta">
+    <div><b>文档版本</b>　v1.0　·　<b>整理日期</b>　2026-09-30　·　<b>资料来源</b>　项目源码、60+ 份迭代报告、设计记忆库</div>
+    <div style="margin-top:6px"><b>技术栈</b>　Qt 5.14.2 (msvc2017_64) ＋ Win32 / Shell API　·　<b>平台</b>　Windows 10/11</div>
+    <div style="margin-top:6px"><b>文档性质</b>　纯文档整理，未改动任何源码</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#s1">产品概述</a></li>
+    <li><a href="#s2">产品架构</a></li>
+    <li><a href="#s3">功能设计（产品设计视角）</a></li>
+    <li><a href="#s4">功能实现（工程实现视角）</a></li>
+    <li><a href="#s5">交互与视觉规范</a></li>
+    <li><a href="#s6">质量保障与交付</a></li>
+    <li><a href="#s7">附录：迭代历程</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 1. 产品概述 ============ -->
+<section id="s1">
+  <h2>一、产品概述</h2>
+  <p class="lead">DestopTools 是一款面向 Windows 桌面的图标整理与效率工具，借鉴 360 桌面整理的体验范式，通过接管原生桌面图标并自建可视化层，帮助用户把混乱的桌面组织为可分类、可收纳、可备份、可个性化的有序工作空间。</p>
+
+  <h3>1.1 产品定位</h3>
+  <p>在"原生桌面图标杂乱、缺乏分组与收纳手段"这一普遍痛点上，DestopTools 提供<b>一层轻量的桌面治理层</b>：它不改变文件在磁盘上的位置，只重新组织"桌面上如何呈现与管理图标"。产品定位于<b>系统增强型效率工具</b>，而非文件管理器。</p>
+
+  <h3>1.2 目标用户</h3>
+  <ul>
+    <li><b>重度桌面使用者</b>：桌面堆积数十至上百个快捷方式 / 文件的办公人群；</li>
+    <li><b>追求整洁的用户</b>：希望桌面分区、分类、按需隐藏图标的强迫症型用户；</li>
+    <li><b>多项目工作者</b>：通过"收纳盒 + 分类"隔离不同项目的桌面资源；</li>
+    <li><b>注重个性化</b>：对主题色、透明度、圆角等视觉风格有要求的用户。</li>
+  </ul>
+
+  <h3>1.3 核心价值（解决的痛点）</h3>
+  <div class="kpi">
+    <div class="box"><div class="num">整洁</div><div class="cap">接管原生图标，自建可视化桌面层</div></div>
+    <div class="box"><div class="num">有序</div><div class="cap">收纳盒 + 多分类，图标按项目/用途归组</div></div>
+    <div class="box"><div class="num">安全</div><div class="cap">桌面布局一键备份与整机恢复</div></div>
+    <div class="box"><div class="num">顺手</div><div class="cap">双击隐藏、空白建盒、全局 F2/Delete</div></div>
+    <div class="box"><div class="num">个性</div><div class="cap">主题色 / 透明度 / 圆角 / 菜单统一样式</div></div>
+  </div>
+
+  <h3>1.4 产品特性一览</h3>
+  <table>
+    <tr><th style="width:22%">能力域</th><th>关键特性</th></tr>
+    <tr><td>桌面整理</td><td>原生图标接管与隐藏、自绘图标层、内联重命名、回收站删除、框选多选、跨窗拖放</td></tr>
+    <tr><td>收纳与分类</td><td>桌面收纳盒、分类标签页（点击/悬停切换）、视图档位（大/中/小/列表）、分类页缓存免刷新</td></tr>
+    <tr><td>数据安全</td><td>360 式桌面备份、应用备份（退出后覆盖+重启）、备份瞬间缩略图</td></tr>
+    <tr><td>任务管理</td><td>待办清单、到期提醒、喇叭闪烁标记、闹铃出声</td></tr>
+    <tr><td>个性化</td><td>主题色、背景透明度、圆角、菜单/弹层透明度、占位色、应用图标（谭/征）</td></tr>
+    <tr><td>效率操作</td><td>双击空白隐藏图标、空白拉框建盒、文件快速搜索、助手面板</td></tr>
+    <tr><td>桌面智能</td><td>窗口自动对齐（磁吸+网格+顶部留白）、Alt 逃生</td></tr>
+    <tr><td>工程品质</td><td>鼠标卡顿根治、崩溃取证体系、统一诊断日志开关</td></tr>
+  </table>
+
+  <h3>1.5 设计理念</h3>
+  <p>产品的三条底层原则贯穿所有功能设计：</p>
+  <div class="card">
+    <p><span class="lbl lbl-point">原则一</span><b>不打扰系统，只治理呈现。</b> 文件物理位置不变，所有整理仅作用于"桌面呈现层"，降低用户迁移与误删风险。</p>
+    <p><span class="lbl lbl-point">原则二</span><b>全局交互零摩擦。</b> F2/Delete、双击隐藏、框选等高频操作通过系统级钩子直达，无需聚焦窗口。</p>
+    <p><span class="lbl lbl-point">原则三</span><b>性能即体验。</b> 鼠标流畅度是桌面工具的生命线，所有重活（Shell 取图、刷新、置顶）均以"不阻塞 GUI 线程"为红线。</p>
+  </div>
+</section>
+
+<!-- ============ 2. 产品架构 ============ -->
+<section id="s2">
+  <h2>二、产品架构</h2>
+  <p>DestopTools 采用<b>单进程多顶层窗</b>架构，以"桌面治理层"为核心，将不同能力拆分为互相协作的悬浮窗与后台服务。</p>
+
+  <h3>2.1 总体架构分层</h3>
+  <table>
+    <tr><th style="width:20%">层级</th><th>职责</th><th>代表模块</th></tr>
+    <tr><td>应用框架层</td><td>单实例入口、全局 QSS 下发、退出编排、崩溃取证</td><td>main / mainwindow / crashtrace / diagtrace</td></tr>
+    <tr><td>桌面治理层</td><td>原生桌面接管、自绘图标层、全局交互（钩子/Raw Input）</td><td>desktopmirrorwindow / desktopiconbutton / lowlevelhookmanager / rawmouse</td></tr>
+    <tr><td>组织层</td><td>收纳盒、分类、网格布局、局部刷新</td><td>icongridwindow / fencebox / categorystore</td></tr>
+    <tr><td>数据与系统层</td><td>桌面扫描、快捷方式解析、Shell 文件操作、区域数据</td><td>desktopscanner / shellops / regiondata</td></tr>
+    <tr><td>体验层</td><td>设置中心、主题、备份、待办、搜索、助手、关机/壁纸</td><td>settingcenter / theme / backupdialog / todostore / filesearch / sidepanel / shutdowntask / wallpaper</td></tr>
+    <tr><td>基础控件层</td><td>无边框弹框、输入对话框、确认框、更新/反馈</td><td>glassmessagebox / glassinputdialog / updatedialog / feedbackdialog</td></tr>
+  </table>
+
+  <h3>2.2 关键悬浮窗与 z 序关系</h3>
+  <p>产品存在一组"band 窗口"（Dock 图标层、收纳盒、助手面板）与位于其上的弹框体系。z 序设计遵循：<b>弹框 &gt; 全部 band 窗口 &gt; 其它正常程序</b>。Dock 因铺满主屏被压至最底（<code>HWND_BOTTOM</code>），收纳盒与助手在其上；所有模态弹框通过错峰 <code>raiseAboveBandWindows</code> 保证不被 band 窗口遮盖。</p>
+</section>
+
+<!-- ============ 3. 功能设计 ============ -->
+<section id="s3">
+  <h2>三、功能设计（产品设计视角）</h2>
+  <p class="lead">以下按用户场景 → 设计目标 → 设计要点三段式描述每个核心功能，体现"为什么这么做、做成什么样"。</p>
+
+  <h3>3.1 桌面图标整理（Dock）</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>原生桌面图标无法分组、难以隐藏、重命名/删除步骤繁琐，且多屏与高 DPI 下观感不一致。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>提供一层"替身桌面"：接管原生图标并隐藏，在自有分层窗上自绘图标，保持原生观感但获得更强的组织与交互能力。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>接管采用 owner 双保险（绑定 <code>SHELLDLL_DefView</code> + 免激活属性），避免被系统重置；</li>
+      <li>自绘图标层铺满主屏并压至最底，图标与标签并集命中（含 4px 间隙），避免"点空白误清空选中"；</li>
+      <li>内联重命名仅 Enter/Esc/点框外三通道提交；新建项自动弹框，按"会话事实"判断而非名字形状；</li>
+      <li>删除以"图标矩形与回收站相交 ≥1/4"为判据，统一走系统回收站（可撤销）；</li>
+      <li>框选多选采用 Qt + 低级鼠标钩子双通道状态机，保证全局拖动顺滑。</li>
+    </ul>
+  </div>
+
+  <h3>3.2 收纳盒与分类</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>桌面图标一旦变多便无从归类；切分类时整屏重刷导致卡顿；盒内排序被刷新"还原"。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>把桌面划分为可拖拽的"收纳盒"，并用分类标签在盒内/盒间切换视图，切换零刷新、排序可持久。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>收纳盒由桌面空白拉框（≥48×36 逻辑像素）创建，生成前就地弹出确认框，位置/大小等于所画之框；</li>
+      <li>分类标签页支持"点击切换 / 悬停切换（停稳 140ms）"两种模式，热更新即时生效，无需重启；</li>
+      <li>视图提供大/中（默认）/小/列表四档，列表档整块自绘以保证"图标贴左 + 文字紧随"；</li>
+      <li>分类页缓存：切走换父、切回复用，以"逐页内容签名"命中，避免重复取图与重建；</li>
+      <li>盒内仅换顺序时走原地复用（不销毁重建按钮），盒窗口顺序为权威数据，防止刷新"还原"用户排序。</li>
+    </ul>
+  </div>
+
+  <h3>3.3 桌面备份与恢复</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>精心整理的桌面布局一旦因重装/误操作丢失，无法快速还原；普通截图无法记录完整配置。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>提供 360 式备份网格，一键保存当前全部桌面配置，并可在任意时刻原样恢复。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>备份实体包含<b>两份配置</b>（主设置 <code>DestopTools.ini</code> ＋ 分类库 <code>categories.ini</code>）、备份瞬间桌面缩略图、元信息；</li>
+      <li>应用备份采用"退出后覆盖 + 拉起新实例"编排，确保运行期各窗口持续落盘的值不被覆盖，并正确处理单实例管道；</li>
+      <li>截图采用 Win32 <code>BitBlt + CAPTUREBLT</code> 而非 Qt 截屏（后者在 DWM 下只抓壁纸）；截屏期间仅将本窗移出屏幕（<code>move(-32000,-32000)</code>），杜绝透明模态窗死锁。</li>
+    </ul>
+  </div>
+
+  <h3>3.4 待办与提醒</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>桌面工具缺少轻量待办；到期提醒易被忽略，且反复弹窗打扰。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>在桌面侧常驻一个不打扰的待办与提醒机制，到期只提醒一次、可确认清除。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>到期提醒只发一次 <code>reminderDue</code>，清除仅当用户点"OK"；Esc/关闭不清除，重启后再次提醒；</li>
+      <li>待办行首以喇叭图标闪烁标记（两版预渲染 pixmap + 450ms 定时器互换，避免离屏渲染常驻负担）；</li>
+      <li>闹铃出声由独立开关控制，消费端每次实时读盘，尊重用户静音偏好。</li>
+    </ul>
+  </div>
+
+  <h3>3.5 主题与个性化</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>原有透明度把线框与文字一起淡化、且不作用到独立弹层（菜单/下拉），观感撕裂。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>透明度只作用于背景，线框/文字恒定；主题色与透明度对所有窗口、弹层、菜单统一生效。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>双 alpha 通道：<code>alphaF</code>（线框/文字恒定）与 <code>bgAlphaF</code>（背景随滑块），全项目背景色字面量统一经 <code>applyTokens</code> 注入；</li>
+      <li>菜单透明度通过"首次弹出前重建平台窗（加 <code>WS_EX_LAYERED</code>）"实现真正半透明，长期持有的菜单挂 <code>aboutToShow</code> 防样式烘死；</li>
+      <li>占位文字颜色钉死为固定灰，不随主题色变黑；关于页 Logo 等"烤进像素"的图形在切换主题时重建；</li>
+      <li>应用图标以"谭/征"定制生成，十档尺寸编入 exe 资源。</li>
+    </ul>
+  </div>
+
+  <h3>3.6 快捷操作</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>桌面图标想一键隐藏、想随手圈一块区域收纳，但系统无原生手段。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>把两个高频意图做成开关：双击空白隐藏全部图标；空白拉框直接建收纳盒。</p>
+    <p><span class="lbl lbl-point">设计要点</span></p>
+    <ul>
+      <li>双击隐藏需自判双击（低级钩子不送 <code>WM_LBUTTONDBLCLK</code>）；隐藏态仅内存、并在每次刷新末尾重套，避免被冲掉；</li>
+      <li>拉框建盒复用既有橡皮筋机制，Ctrl 拉框保留为框选逃生口；建盒模式自绘强调色与"松开即创建收纳盒"提示。</li>
+    </ul>
+  </div>
+
+  <h3>3.7 文件搜索与助手面板</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>桌面找文件靠肉眼翻；缺少常驻的轻量入口。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>提供一个可长期存活、可拖动的快速搜索窗与助手面板（搜索/时钟/闹铃）。</p>
+    <p><span class="lbl lbl-point">设计要点</span>搜索窗与助手面板均为无边框窗，自实现拖动；长期存活窗加层级看护，仅在确实被 band 窗口压住时才救回，避免与正常 z 序变化打架。</p>
+  </div>
+
+  <h3>3.8 自动对齐（窗口吸附）</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>手动摆放收纳盒/助手难以对齐，贴顶边也不美观。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>拖动时磁吸相邻窗口与工作区边缘，并以网格兜底对齐；顶部留白统一。</p>
+    <p><span class="lbl lbl-point">设计要点</span>磁吸优先、网格兜底；磁吸阈值 8 逻辑像素（不乘 DPR）；网格步长等于折叠盒高度；顶部统一留白 10px 且与网格解耦；拖动时按 Alt 临时脱离吸附。</p>
+  </div>
+
+  <h3>3.9 设置中心</h3>
+  <div class="card">
+    <p><span class="lbl lbl-pain">用户痛点</span>大量设置项"写盘了却没生效"或"改完要重启"，且同页单选项互相覆盖。</p>
+    <p><span class="lbl lbl-goal">设计目标</span>设置中心作为统一配置入口，改动即时热更新，单选项互不干扰。</p>
+    <p><span class="lbl lbl-point">设计要点</span>设置消费采用"构造读一次 + 广播热更新"两段式；同页多对单选钮各自绑定 <code>QButtonGroup</code>，杜绝 autoExclusive 连坐；透明度/主题色/分区标签切换等逐项接通消费端。</p>
+  </div>
+</section>
+
+<!-- ============ 4. 功能实现 ============ -->
+<section id="s4">
+  <h2>四、功能实现（工程实现视角）</h2>
+  <p class="lead">以下从工程角度说明关键能力是如何落地的，以及攻克了哪些硬骨头。所有实现均在不改动功能语义的前提下完成。</p>
+
+  <h3>4.1 无边框分层窗框架</h3>
+  <div class="spec">
+    <b>技术方案：</b>所有 band 窗口与弹框均为 <code>FramelessWindowHint + WA_TranslucentBackground</code> 的顶层窗，自行实现拖动（press 记偏移、move 重定位，可拖区排除输入/列表/按钮）。弹框遵循"三件套"：特定 flags（禁 Dialog，避免被 Dock 压底）+ 错峰 0/60/200ms 升层 + nativeEvent 清除 <code>SWP_NOACTIVATE</code>。z 序守卫写在各窗 <code>nativeEvent</code> 的 <code>WM_WINDOWPOSCHANGING</code> 中（全局 filter 看不到该同步消息）。
+  </div>
+  <div class="ok">难点攻克：Qt 在 show() 后仍会沿 parent 链补一次 z 序调整，单次升层会被覆盖 → 必须错峰多轮；<code>raiseAboveBandWindows</code> 须先求"最上层 band"作唯一 anchor 再插一次，否则多 band 时被夹在中间或压到某 band 之下。</div>
+
+  <h3>4.2 全局交互（钩子 → Raw Input）</h3>
+  <div class="spec">
+    <b>技术方案：</b>F2/Delete 通过 <code>WH_KEYBOARD_LL</code> 实现（挂件窗拿不到键盘焦点）；双击隐藏/框选通过 <code>WH_MOUSE_LL</code>。<b>关键约束：</b>钩子回调路径禁同步文件 I/O（走非阻塞诊断日志），物理坐标须 <code>phys/dpr</code> 换算，闸门用 <code>registered(token)</code> 而非 <code>active()</code> 防嵌套计数坑。
+  </div>
+  <div class="ok">难点攻克：鼠标卡顿根治——低级鼠标钩子是系统<b>同步回调</b>到安装线程，GUI 线程一被占用全系统光标等待。最终将鼠标钩子迁移至 Raw Input（<code>WM_INPUT</code>，异步投递、不进系统输入链），从根本上解除"堵 GUI 线程＝堵全系统"的因果链。</div>
+
+  <h3>4.3 性能治理</h3>
+  <div class="spec">
+    <b>技术方案：</b>① Shell 取图缓存——<code>resolveShortcut()</code> 原对每个 <code>.lnk</code> 走完整 COM 取图，被键盘钩子放大成全系统排队；改为按"路径|mtime"缓存 + 512 上限。② 静态缓存限容（图标缓存 ≤2048）。③ 事件驱动替代轮询——以 <code>SetWinEventHook</code> ×4 取代 150ms 全屏状态轮询。④ 收纳盒局部刷新——只换顺序走原地复用，杜绝整屏重刷与重取图。
+  </div>
+  <div class="ok">量化收益：分类切换由"每切一次卡一次"变为零刷新复用；图标队列由 30ms×2 摊成 ≈5s 卡窗降至 30ms×1；GUI 线程周期性占用被系统性削减。</div>
+
+  <h3>4.4 主题与透明度系统</h3>
+  <div class="spec">
+    <b>技术方案：</b>全项目背景色字面量仅两种，全部包在 <code>applyTokens</code> 中，故只改该函数即全应用生效。双通道分离线框与背景 alpha；滑块 <code>setTracking(false)</code> 保证"拖滑块零下发、松手一次 repolish"。菜单透明度通过对 QMenu 在首次 popup 前加 <code>FramelessWindowHint|NoDropShadowWindowHint</code> + 透明属性触发平台窗重建，使其拿到 <code>WS_EX_LAYERED</code>。
+  </div>
+  <div class="note">已知遗留：QComboBox 下拉弹层同样缺 alpha 合成位，且同一手法修不了（其 container 会重置 flags），目前下拉背景只能合到黑底；表头虽生效，但因叠加层数多导致"透感"弱于单层。</div>
+
+  <h3>4.5 缓存与局部刷新策略</h3>
+  <div class="spec">
+    <b>技术方案：</b>分类页缓存以"逐页内容签名（顺序敏感）"命中，切回直接复用按钮而非重建；盒内增量刷新 <code>applyItemsDeltaInPlace</code> 只在"集合相同、仅顺序不同"时按新顺序放回同一批按钮；盒窗口顺序由窗口权威数据承载，防止刷新"还原"用户排序。
+  </div>
+
+  <h3>4.6 崩溃取证与诊断</h3>
+  <div class="spec">
+    <b>技术方案：</b>统一诊断开关仅由 INI <code>[Diagnostics] traceEnabled</code> 控制（默认 false；false 时 trace.log 与 crash.log 均不写）。崩溃取证挂 VEH（<code>AddVectoredExceptionHandler</code>）先于 signal/SEH 获取真异常码与地址；release 版以 <code>DestopTools.map</code> 为唯一符号源，配 <code>tools/addr2func.py</code> 反查栈帧。<code>CrashTrace::mark</code> 仅内存缓冲、崩溃才输出，里程碑事件用 <code>event()</code> 直落盘。
+  </div>
+  <div class="ok">难点攻克：跨进程 <code>HIMAGELIST</code> 必失效导致 COMCTL32 内部 AV（"运行一会儿自己关闭"真凶）；以 SEH 关进熔断器，失效 8 次/60s 降为 1 次，杜绝进程级致命自关。</div>
+</section>
+
+<!-- ============ 5. 交互与视觉规范 ============ -->
+<section id="s5">
+  <h2>五、交互与视觉规范</h2>
+  <h3>5.1 统一弹框规范</h3>
+  <table>
+    <tr><th style="width:30%">规范项</th><th>约定</th></tr>
+    <tr><td>flags</td><td><code>FramelessWindowHint | Window | NoDropShadowWindowHint</code>（禁 Qt::Dialog）</td></tr>
+    <tr><td>升层</td><td>错峰 0/60/200ms：clearOwner → raiseAboveBandWindows → activateWindow</td></tr>
+    <tr><td>z 序守卫</td><td>nativeEvent 中 clampBandZOrder 并清除 SWP_NOACTIVATE</td></tr>
+    <tr><td>自定义按钮</td><td>确认框自定义按钮禁用 <code>primaryButtonStyle</code>（其 padding 会裁 16px 图标），改用紧凑 padding 版</td></tr>
+    <tr><td>样式外溢</td><td>所有样式表必须带 id 选择器（<code>QFrame#objName{}</code>），防止规则外溢到子件/兄弟类</td></tr>
+  </table>
+
+  <h3>5.2 主题规范</h3>
+  <div class="pill">border 一律 alphaF（恒定）</div>
+  <div class="pill">背景一律 bgAlphaF（随滑块）</div>
+  <div class="pill">圆角走 Theme::radiusPx(base)</div>
+  <div class="pill">菜单统一 Theme::applyMenuStyle()</div>
+  <div class="pill">占位色唯一来源 QPalette::PlaceholderText</div>
+  <p style="margin-top:14px">背景字面量仅 <code>rgba(17,26,46,1.0)</code>（窗/面板）与 <code>rgba(11,16,33,1.0)</code>（深底）两种，全部经 <code>applyTokens</code>；<code>globalStyleSheet()</code> 缓存键须含 accent+transparency，否则旧串原样返回导致透明度永不生效。</p>
+</section>
+
+<!-- ============ 6. 质量保障 ============ -->
+<section id="s6">
+  <h2>六、质量保障与交付</h2>
+  <h3>6.1 验证体系</h3>
+  <ul>
+    <li><b>链接产品 .obj 的探针台</b>：<code>tools/alphatest</code>（主题逻辑）、<code>tagprobe</code>（标签切换端到端）、<code>scprobe</code>（设置持久化）、<code>menualpha</code>/<code>popupprobe</code>/<code>wndprobe</code>（弹层透明度实测）、<code>panelprobe</code>/<code>placeholderprobe</code>（占位色）；均自动备份/还原用户 INI。</li>
+    <li><b>双编码产物断言</b>：<code>QStringLiteral</code> 落 UTF-16LE、信号/资源名可能是 ASCII/UTF-8，任一编码命中即算存在，确保新码确实编进 exe。</li>
+    <li><b>崩溃取证</b>：VEH + <code>.map</code> + <code>addr2func.py</code> 形成完整栈回溯链。</li>
+  </ul>
+
+  <h3>6.2 构建与打包（已锁定）</h3>
+  <table>
+    <tr><th style="width:22%">环节</th><th>命令 / 说明</th></tr>
+    <tr><td>编译（唯一入口）</td><td><code>python.exe tools/build.py</code> ＝ qmake -spec win32-msvc (release) ＋ nmake；每次必跑 qmake</td></tr>
+    <tr><td>打包（唯一入口）</td><td><code>python.exe tools/pack.py</code>（windeployqt ＋ 确保 release\ 含 exe 与 region.json）；目录＝release\ 根</td></tr>
+    <tr><td>环境</td><td>Qt 5.14.2 msvc2017_64 ｜ VS2022 ｜ WinSDK 10.0.22621.0 ｜ .pro 含 /utf-8</td></tr>
+    <tr><td>产物日志</td><td>tools/build_last.log、tools/pack_last.log</td></tr>
+  </table>
+  <div class="ok">构建纪律：禁止退回 MinGW / Qt Creator / 手工 cl；<code>LNK1104</code> 视为"用户正在运行 exe"，请其关闭而非绕过；构建/打包目录锁定为 release\ 根，不得另建子目录。</div>
+</section>
+
+<!-- ============ 7. 附录 ============ -->
+<section id="s7">
+  <h2>七、附录：迭代历程（按主题）</h2>
+  <p>本项目自 2026-08 起持续迭代，关键里程碑按主题归集如下（详细证据见根目录各 <code>*报告*.md</code> 与 <code>MEMORY.md</code>/<code>MEMORY_DETAIL.md</code>）：</p>
+  <table>
+    <tr><th style="width:24%">主题</th><th>关键节点</th></tr>
+    <tr><td>主题 / 透明度</td><td>2026-09-21 背景透明度改造、菜单/占位色透明度修复</td></tr>
+    <tr><td>鼠标卡顿 / 性能</td><td>2026-09-21 卡顿排查 → 2026-09-24 根治（Raw Input）+ 减负</td></tr>
+    <tr><td>设置 / 持久化</td><td>2026-09-21 设置中心持久化、编译打包锁定</td></tr>
+    <tr><td>分区标签 / 分类</td><td>2026-09-21 接线 → 2026-09-22 热更新/悬停 → 2026-09-24 卡顿重实施</td></tr>
+    <tr><td>收纳盒 / Dock</td><td>2026-09-22 拖入指示/置顶浮层 → 2026-09-24 局部刷新/图标即时出现</td></tr>
+    <tr><td>桌面备份</td><td>2026-09-24 仿 360 布局 → 真根因（两份配置）修复</td></tr>
+    <tr><td>快捷操作 / 建盒</td><td>2026-09-24 两项开关接通、就地确认弹框</td></tr>
+    <tr><td>待办 / 闹铃</td><td>2026-09-24 喇叭闪烁标记、闹铃开关、确认清除</td></tr>
+    <tr><td>健壮性 / 崩溃</td><td>2026-09-24 COMCTL32 跨进程句柄崩溃、运行1小时自动退出排查、回退记录</td></tr>
+  </table>
+  <p style="color:var(--sub);font-size:13.5px;margin-top:18px">注：本附录仅作时间线索引，工程设计铁律与踩坑证据以 <code>MEMORY.md</code>（速查）与 <code>MEMORY_DETAIL.md</code>（明细）为准。本文档为纯文档整理，未改动任何源代码。</p>
+</section>
+
+</div>
+
+<footer>
+  DestopTools · 产品功能设计与实现文档 v1.0 · 整理于 2026-09-30 · 本文档由资料整合生成，未修改项目源码
+</footer>
+
+</body>
+</html>

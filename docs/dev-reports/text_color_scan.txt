@@ -1,0 +1,111 @@
+总 color 声明 236 处，其中非白 51 处（扫描 67 个文件）
+
+==============================================================================
+FILE feedbackdialog.cpp   (2 处非白)
+==============================================================================
+  L110   [CSS ] rgba(255,255,255,0.80) 灰度≈208     | "QPushButton { background: transparent; color: rgba(255,255,255,0.80); border: none; border-radius: 4px; padding: 2px 8p
+  L286   [CSS ] rgba(255,255,255,0.45) 灰度≈125     | "QLineEdit::placeholder { color: rgba(255,255,255,0.45); }"
+
+==============================================================================
+FILE fencebox.cpp   (2 处非白)
+==============================================================================
+  L106   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | "QLabel#fenceCount { color: rgba(255,255,255,0.55); font-size: 11px; padding-right: 10px;"
+  L108   [CSS ] rgba(255,255,255,0.42) 灰度≈118     | "QLabel#fenceEmptyHint { color: rgba(255,255,255,0.42); font-size: 12px;"
+
+==============================================================================
+FILE filesearchwidget.cpp   (3 处非白)
+==============================================================================
+  L206   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | m_statusLabel->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.55); font-size: 12px; background: transparent; bo
+  L244   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | webHint->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.55); font-size: 12px; background: transparent; border: 
+  L363   [CSS ] rgba(255,255,255,0.50) 灰度≈137     | pathLbl->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.50); font-size: 11px; background: transparent; border: 
+
+==============================================================================
+FILE settingcenterdialog.cpp   (16 处非白)
+==============================================================================
+  L184   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | "QComboBox:disabled { background-color: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); border-color: rgba(34,211,
+  L203   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | "QLineEdit::placeholder { color: rgba(255,255,255,0.5); }"
+  L245   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | "QComboBox:disabled { background-color: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); border-color: rgba(34,211,
+  L264   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | "QLineEdit::placeholder { color: rgba(255,255,255,0.5); }"
+  L811   [CSS ] rgba(255,255,255,0.4)  灰度≈114     | "QPushButton#weatherAutoLocateBtn:disabled { color: rgba(255,255,255,0.4); border-color: rgba(34,211,238, 0.08); }"
+  L939   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | "QComboBox:disabled { background-color: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); border-color: rgba(34,211,
+  L1261  [CSS ] rgba(255,255,255,0.5)  灰度≈137     | bottomHint->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.5); font-size: 11px;"));
+  L1343  [CSS ] #67E8F9                灰度≈194     | "QPushButton:hover { color: #67E8F9; }"
+  L1692  [CSS ] rgba(255,255,255,0.70) 灰度≈184     | "QToolButton { background: transparent; color: rgba(255,255,255,0.70); border: none; font-size: 13px; }"
+  L1694  [CSS ] #67E8F9                灰度≈194     | "QToolButton:pressed { color: #67E8F9; }"
+  L1695  [CSS ] rgba(255,255,255,0.20) 灰度≈67      | "QToolButton:disabled { color: rgba(255,255,255,0.20); }"
+  L1706  [CSS ] rgba(255,255,255,0.70) 灰度≈184     | "QToolButton { background: transparent; color: rgba(255,255,255,0.70); border: none; font-size: 13px; }"
+  L1708  [CSS ] #67E8F9                灰度≈194     | "QToolButton:pressed { color: #67E8F9; }"
+  L1709  [CSS ] rgba(255,255,255,0.20) 灰度≈67      | "QToolButton:disabled { color: rgba(255,255,255,0.20); }"
+  L1864  [CSS ] rgba(255,255,255,0.5)  灰度≈137     | versionLabel->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.5); background: transparent; border: none; font-si
+  L1912  [CSS ] #22D3EE                灰度≈161     | "QPushButton:hover { color: #22D3EE; text-decoration: underline; }"
+
+==============================================================================
+FILE shutdowntimerwindow.cpp   (12 处非白)
+==============================================================================
+  L136   [CSS ] rgba(255,255,255,0.35) 灰度≈102     | "QComboBox:disabled { color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.12); }"
+  L147   [CSS ] rgba(255,255,255,0.35) 灰度≈102     | "QDateEdit:disabled { color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.12); }"
+  L154   [CSS ] rgba(255,255,255,0.35) 灰度≈102     | "QRadioButton:disabled { color: rgba(255,255,255,0.35); }"
+  L311   [CSS ] #22D3EE                灰度≈161     | "QToolButton { color: #22D3EE; background: transparent; border: none; font-size: 12px; padding: 2px 4px; }"
+  L312   [CSS ] #67E8F9                灰度≈194     | "QToolButton:hover { color: #67E8F9; }")));
+  L335   [CSS ] rgba(255,255,255,0.60) 灰度≈161     | QStringLiteral("color: rgba(255,255,255,0.60); font-size: 12px;"));
+  L366   [CSS ] #22D3EE                灰度≈161     | "QToolButton { color: #22D3EE; background: transparent; border: none; font-size: 13px; padding: 2px 4px; }"
+  L367   [CSS ] #67E8F9                灰度≈194     | "QToolButton:hover { color: #67E8F9; }")));
+  L584   [CSS ] rgba(255,255,255,0.72) 灰度≈189     | row, QStringLiteral("color: rgba(255,255,255,0.72);"));
+  L586   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | auto* mode = makeLabel(repeatText(t), row, QStringLiteral("color: rgba(255,255,255,0.55);"));
+  L593   [CSS ] rgba(251,146,60,0.95)  灰度≈145     | "QToolButton { color: rgba(251,146,60,0.95); background: transparent; border: none;"
+  L595   [CSS ] #FDBA74                灰度≈185     | "QToolButton:hover { color: #FDBA74; text-decoration: underline; }"));
+
+==============================================================================
+FILE sidepanelwidget.cpp   (3 处非白)
+==============================================================================
+  L455   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | sep1->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.5); background: transparent; padding: 0px 4px;"));
+  L476   [CSS ] rgba(255,255,255,0.5)  灰度≈137     | m_lunarLabel->setStyleSheet(QStringLiteral("color: rgba(255,255,255,0.5); background: transparent;"));
+  L1076  [CSS ] rgba(255,255,255,0.45) 灰度≈125     | ? QStringLiteral("color: rgba(255,255,255,0.45); background: transparent; border: none;"
+
+==============================================================================
+FILE theme.h   (6 处非白)
+==============================================================================
+  L321   [CSS ] rgba(255,255,255,0.72) 灰度≈189     | "QToolButton { color: rgba(255,255,255,0.72); border: 1px solid transparent; border-radius: 16px; padding: 6px 18px; bac
+  L332   [CSS ] rgba(255,255,255,0.45) 灰度≈125     | "QLineEdit::placeholder { color: rgba(255,255,255,0.45); }"
+  L349   [CSS ] rgba(255,255,255,0.40) 灰度≈114     | "QMenu::item:disabled { color: rgba(255,255,255,0.40); }"
+  L394   [CSS ] rgba(255,255,255,0.45) 灰度≈125     | "QLineEdit::placeholder { color: rgba(255,255,255,0.45); }"
+  L407   [CSS ] rgba(255,255,255,0.40) 灰度≈114     | "QMenu::item:disabled { color: rgba(255,255,255,0.40); }"
+  L449   [CSS ] rgba(255,255,255,0.72) 灰度≈189     | "QTabBar::tab { color: rgba(255,255,255,0.72); background: transparent; border: 1px solid transparent; border-radius: 10
+
+==============================================================================
+FILE todolistwindow.cpp   (3 处非白)
+==============================================================================
+  L62    [CSS ] rgba(255,255,255,0.85) 灰度≈219     | "QLabel { color: rgba(255,255,255,0.85); background: transparent; border: none; font-size: 12px; }"
+  L75    [CSS ] rgba(255,255,255,0.65) 灰度≈172     | "QToolButton { color: rgba(255,255,255,0.65); background: transparent; border: 1px solid transparent;"
+  L278   [CSS ] rgba(255,255,255,0.40) 灰度≈114     | "color: rgba(255,255,255,0.40); background: transparent; border: none; font-size: 12px;")));
+
+==============================================================================
+FILE wallpaperwindow.cpp   (4 处非白)
+==============================================================================
+  L89    [CSS ] rgba(255,255,255,0.85) 灰度≈219     | "QToolButton { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04);"
+  L174   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | QStringLiteral("color: rgba(255,255,255,0.55); font-size: 12px;")));
+  L211   [CSS ] rgba(255,255,255,0.45) 灰度≈125     | "          border-radius: 8px; color: rgba(255,255,255,0.45); font-size: 12px; }"));
+  L238   [CSS ] rgba(255,255,255,0.55) 灰度≈149     | QStringLiteral("color: rgba(255,255,255,0.55); font-size: 11px;"));
+
+##############################################################################
+# 按色值汇总（出现次数 / 位置）
+##############################################################################
+rgba(255,255,255,0.5)      灰度≈137     x9   settingcenterdialog.cpp:184, settingcenterdialog.cpp:203, settingcenterdialog.cpp:245, settingcenterdialog.cpp:264, settingcenterdialog.cpp:939, settingcenterdialog.cpp:1261, settingcenterdialog.cpp:1864, sidepanelwidget.cpp:455, sidepanelwidget.cpp:476
+rgba(255,255,255,0.55)     灰度≈149     x6   fencebox.cpp:106, filesearchwidget.cpp:206, filesearchwidget.cpp:244, shutdowntimerwindow.cpp:586, wallpaperwindow.cpp:174, wallpaperwindow.cpp:238
+rgba(255,255,255,0.45)     灰度≈125     x5   feedbackdialog.cpp:286, sidepanelwidget.cpp:1076, theme.h:332, theme.h:394, wallpaperwindow.cpp:211
+#67e8f9                    灰度≈194     x5   settingcenterdialog.cpp:1343, settingcenterdialog.cpp:1694, settingcenterdialog.cpp:1708, shutdowntimerwindow.cpp:312, shutdowntimerwindow.cpp:367
+#22d3ee                    灰度≈161     x3   settingcenterdialog.cpp:1912, shutdowntimerwindow.cpp:311, shutdowntimerwindow.cpp:366
+rgba(255,255,255,0.35)     灰度≈102     x3   shutdowntimerwindow.cpp:136, shutdowntimerwindow.cpp:147, shutdowntimerwindow.cpp:154
+rgba(255,255,255,0.72)     灰度≈189     x3   shutdowntimerwindow.cpp:584, theme.h:321, theme.h:449
+rgba(255,255,255,0.40)     灰度≈114     x3   theme.h:349, theme.h:407, todolistwindow.cpp:278
+rgba(255,255,255,0.70)     灰度≈184     x2   settingcenterdialog.cpp:1692, settingcenterdialog.cpp:1706
+rgba(255,255,255,0.20)     灰度≈67      x2   settingcenterdialog.cpp:1695, settingcenterdialog.cpp:1709
+rgba(255,255,255,0.85)     灰度≈219     x2   todolistwindow.cpp:62, wallpaperwindow.cpp:89
+rgba(255,255,255,0.80)     灰度≈208     x1   feedbackdialog.cpp:110
+rgba(255,255,255,0.42)     灰度≈118     x1   fencebox.cpp:108
+rgba(255,255,255,0.50)     灰度≈137     x1   filesearchwidget.cpp:363
+rgba(255,255,255,0.4)      灰度≈114     x1   settingcenterdialog.cpp:811
+rgba(255,255,255,0.60)     灰度≈161     x1   shutdowntimerwindow.cpp:335
+rgba(251,146,60,0.95)      灰度≈145     x1   shutdowntimerwindow.cpp:593
+#fdba74                    灰度≈185     x1   shutdowntimerwindow.cpp:595
+rgba(255,255,255,0.65)     灰度≈172     x1   todolistwindow.cpp:75
